@@ -1,0 +1,24 @@
+env:
+  environment: 
+  log_level: 
+  url: 
+http_server:
+  address: 
+  timeout: 
+  idle_timeout: 
+  read_timeout: 
+  write_timeout: 
+postgres:
+  host: 
+  port: 
+  user: 
+  password: 
+  database: 
+  sslmode: "disable"
+memcached:
+  servers: [":"]
+smtp:
+  host: 
+  username: 
+  password: 
+  port: 

@@ -1,0 +1,16 @@
+env:
+  environment: ${ENV}
+  log_level: ${LOG_LEVEL}
+http_server:
+  address: ${APP_ADDR}
+  timeout: ${APP_TIMEOUT}
+  idle_timeout: ${IDLE_TIMEOUT}
+  read_timeout: ${READ_TIMEOUT}
+  write_timeout: ${WRITE_TIMEOUT}
+postgres:
+  host: ${POSTGRES}
+  port: ${POSTGRES_PORT}
+  user: ${POSTGRES_USER}
+  password: ${POSTGRES_PASSWORD}
+  database: ${POSTGRES_DB}
+  sslmode: "disable"

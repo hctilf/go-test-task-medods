@@ -1,0 +1,32 @@
+# Build stage
+FROM golang:1.23-alpine AS build
+
+ENV CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+
+WORKDIR /medods
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . ./
+
+RUN go build -ldflags='-s' -o /medods/main ./cmd/main.go
+
+# Run stage
+FROM alpine:latest
+
+USER root
+
+EXPOSE 443
+
+RUN apk update && apk add --no-cache envsubst
+
+COPY --from=build /medods/main /medods/main
+COPY --from=build /medods/config/config.yaml.template /medods/config.yaml.template
+COPY --from=build /medods/deployment/entry.sh /medods/entry.sh
+
+ENTRYPOINT [ "/medods/entry.sh" ]
+
+CMD ["/medods/main"]

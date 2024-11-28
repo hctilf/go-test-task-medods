@@ -1,0 +1,8 @@
+*.toml
+*.pem
+*.conf
+*.log
+logs/
+vendor/
+ssl/
+main

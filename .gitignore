@@ -1,0 +1,10 @@
+logs/
+tmp/
+vendor/
+ssl/
+config/*.yaml
+# deployment/*.yaml
+*.pem
+*.toml
+*.log
+# *.env

@@ -1,0 +1,60 @@
+name: ${SERVER_NAME}
+
+services:
+  app:
+    image: ${CI_REGISTRY_IMAGE}:${TAG}
+    restart: always
+    depends_on:
+      - postgres
+    expose:
+      - "443/tcp"
+    environment:
+      - CONFIG_PATH=${CONFIG_PATH}
+      - CONFIG_NAME=${CONFIG_NAME}
+      - CONFIG_EXT=${CONFIG_EXT}
+      - ENV=${ENV}
+      - SERVER_NAME=${SERVER_NAME}
+      - APP_ADDR=${APP_ADDR}
+      - APP_TIMEOUT=${APP_TIMEOUT}
+      - IDLE_TIMEOUT=${IDLE_TIMEOUT}
+      - READ_TIMEOUT=${READ_TIMEOUT}
+      - WRITE_TIMEOUT=${WRITE_TIMEOUT}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - POSTGRES=${POSTGRES}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    working_dir: /medods
+    networks:
+      medods:
+        ipv4_address: ${APP}
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - medods_pg:/var/lib/postgresql/data
+    networks:
+      medods:
+        ipv4_address: ${POSTGRES}
+
+networks:
+  medods:
+    name: medods
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GATEWAY}
+          ip_range: ${IP_RANGE}
+
+
+volumes:
+  medods_pg:
+    name: ${POSTGRES_STORAGE}
+    
