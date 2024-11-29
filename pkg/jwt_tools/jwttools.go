@@ -16,5 +16,6 @@ func GenerateToken(userGUID string, ipAdderss string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
 
 	tokenString, err := token.SignedString([]byte("secret"))
+
 	return tokenString, err
 }

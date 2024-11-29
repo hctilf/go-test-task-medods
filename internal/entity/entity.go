@@ -15,6 +15,7 @@ type (
 	}
 )
 
+// needed because postgres does not support uuid OPS without adding extension.
 func (r *RefreshToken) BeforeCreate(tx *gorm.DB) error {
 	r.Id = uuid.New()
 

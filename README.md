@@ -31,7 +31,6 @@
 {"status":"success"}
 ```
 
-{"refreshToken":"TOKEN"}
 # POST /api/auth/test
 > тестовая ручка для генерации guid в postgres
 ### response

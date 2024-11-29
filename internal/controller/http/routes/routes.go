@@ -1,8 +1,6 @@
 package routes
 
 import (
-	// "time"
-
 	app "github.com/hctilf/go-test-task-medods/internal/app"
 
 	"github.com/hctilf/go-test-task-medods/internal/controller/http/handlers/auth"

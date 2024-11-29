@@ -6,6 +6,7 @@ import (
 
 func HashToken(data string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(data), bcrypt.DefaultCost)
+
 	return string(bytes), err
 }
 

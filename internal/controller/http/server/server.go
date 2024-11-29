@@ -8,7 +8,6 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
-	"fmt"
 	"math/big"
 	"net"
 	"os"
@@ -28,11 +27,11 @@ type Server struct {
 func NewServer(app *app.Application) *Server {
 	serverFiber := fiber.New(
 		fiber.Config{
-			ServerHeader:      "Snippetbox",
+			ServerHeader:      "medods",
 			ReadTimeout:       app.Config.ReadTimeout,
 			WriteTimeout:      app.Config.WriteTimeout,
 			IdleTimeout:       app.Config.IdleTimeout,
-			AppName:           "snippetbox",
+			AppName:           "medods",
 			EnablePrintRoutes: true,
 		},
 	)
@@ -55,7 +54,7 @@ func NewServer(app *app.Application) *Server {
 func (s *Server) Start(app *app.Application) {
 	ln := createListener(app)
 	if ln == nil {
-		s.notify <- fmt.Errorf("failed to create listener")
+		s.notify <- ErrFailedToCreateListener
 
 		return
 	}
